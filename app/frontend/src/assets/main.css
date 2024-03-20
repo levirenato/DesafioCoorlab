@@ -1,0 +1,13 @@
+@import './base.css';
+
+#app {
+  display: flex; flex-direction: row;
+  background-color: var(--color-background-primary);
+  min-height: 100vh;
+  max-width: 100%;
+}
+a{
+  text-decoration: none;
+  color: var(--text-color-white);
+}
+
