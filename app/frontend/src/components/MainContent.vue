@@ -1,6 +1,9 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import IconTruck from './icons/IconTruck.vue'
+import CalculateForm from './CalculateForm.vue'
+
+
 </script>
 
 <template>
@@ -11,10 +14,11 @@ import IconTruck from './icons/IconTruck.vue'
     </header>
     <main>
       <section class="calculateForm">
-        formulario
-        <RouterLink to="/search">Buscar</RouterLink>
+        <CalculateForm />
       </section>
-      <RouterView />
+      <section class="search">
+        <RouterView />
+      </section>
     </main>
   </div>
 </template>
@@ -23,6 +27,7 @@ import IconTruck from './icons/IconTruck.vue'
 div {
   display: flex;
   flex-wrap: wrap;
+  align-content: flex-start;
   width: calc(82vw);
   height: 35rem;
 
@@ -45,13 +50,17 @@ div {
   color: var(--text-color-white);
 }
 main {
-  display: flex;
+  display: flex; align-items: center; justify-content: flex-start;
   flex-wrap: wrap;
-  height: 100%;
+  height: calc(100% - 4rem);
   width: 100%;
 }
 .calculateForm {
-  height: 100%;
-  width: 40%;
+  align-items: center; justify-content: center;
+  width: calc(45% * fit-content);padding: 1rem;
+}
+.search{
+  flex-grow: 1;
+  display: flex; justify-content: center; align-items: flex-start;
 }
 </style>
