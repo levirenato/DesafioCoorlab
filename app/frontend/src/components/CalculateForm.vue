@@ -1,24 +1,3 @@
-<script setup>
-import IconPayment from './icons/IconPayment.vue'
-import { ref } from "vue";
-
-const selectedDate = ref();
-const selectedCity = ref();
-const cities = ref([
-    { name: 'New York', code: 'NY' },
-    { name: 'Rome', code: 'RM' },
-    { name: 'London', code: 'LDN' },
-    { name: 'Istanbul', code: 'IST' },
-    { name: 'Paris', code: 'PRS' }
-]);
-
-async function teste() {
-    const response = await fetch("http://127.0.0.1:8000");
-    const movies = await response.json();
-    console.log(movies);
-}
-</script>
-
 <template>
     <form method="get">
         <div class="title">
@@ -28,7 +7,7 @@ async function teste() {
         <label for="selectedCity">Destino</label>
         <Dropdown inputId="selectedCity" v-model="selectedCity" 
         v-tooltip.top="'Selecione um destino'"
-        editable :options="cities" optionLabel="name" 
+        editable :options="transports" optionLabel="city" 
         placeholder="Selecione o destino" class="w-full md:w-14rem" style="width: 100%;"/>
         
         <div class="flex-auto cyan-600">
@@ -44,6 +23,33 @@ async function teste() {
         
     </form>
 </template>
+
+<script>
+import IconPayment from './icons/IconPayment.vue'
+import { ref } from "vue";
+
+export default {
+    name: "CalculateForm",
+
+    data(){
+        return {
+            selectedDate : ref(),
+            selectedCity : ref(),
+            transports : [],
+        }
+    },
+
+    mounted(){
+        fetch('http://127.0.0.1:3000/')
+        .then(() => this.json())
+        .then(data => this.cities = data)
+    },
+
+    components : {
+        IconPayment,
+    }
+}
+</script>
 
 <style scoped>
 form{
