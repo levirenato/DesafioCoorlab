@@ -11,6 +11,12 @@ const cities = ref([
     { name: 'Istanbul', code: 'IST' },
     { name: 'Paris', code: 'PRS' }
 ]);
+
+async function teste() {
+    const response = await fetch("http://127.0.0.1:8000");
+    const movies = await response.json();
+    console.log(movies);
+}
 </script>
 
 <template>
@@ -33,7 +39,7 @@ const cities = ref([
         </div>
 
         <router-link to="/search" rel="noopener" class="bt-submit">
-            <Button label="Buscar" style="width: 10rem;" />
+            <Button label="Buscar" style="width: 10rem; color:black;" @click="teste()" />
         </router-link>
         
     </form>
