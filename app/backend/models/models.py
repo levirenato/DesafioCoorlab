@@ -1,9 +1,9 @@
-from sqlalchemy import String
+from sqlalchemy import Column, String, Integer
 
-from .database import Base
+from database.database import Base
 
 
-class User(Base):
+class Transport(Base):
     __tablename__ = "transport"
 
     id = Column(Integer, primary_key=True, autoincrement=True)

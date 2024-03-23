@@ -1,9 +1,12 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI, HTTPException
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
 import uvicorn
-import json
+
+from routes import transport
+
+
 
 app = FastAPI()
 
@@ -21,17 +24,8 @@ app.add_middleware(
 )
 
 
-# methods
-
-@app.get("/")
-async def get_all():
-    
-    return {"hello":"world"}
-
-@app.get("/{city}")
-async def serch(city):
-    return {"hello":"world"}
-
+# Routes
+app.include_router(transport.routes, prefix='')
 
 if __name__ == '__main__':
-    uvicorn.run("app:app", port=3000, reload=True)
+    uvicorn.run("run:app", port=3000, reload=True)
