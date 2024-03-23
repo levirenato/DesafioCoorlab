@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
+import uvicorn
 import json
 
 app = FastAPI()
@@ -22,14 +23,15 @@ app.add_middleware(
 
 # methods
 
-file = open('../../app/data.json')
-DATA = json.load(file)["transport"]
-
 @app.get("/")
 async def get_all():
     
-    return DATA
+    return {"hello":"world"}
 
-@app.get("/destiny/{city}")
+@app.get("/{city}")
 async def serch(city):
-    return DATA
+    return {"hello":"world"}
+
+
+if __name__ == '__main__':
+    uvicorn.run("app:app", port=3000, reload=True)
