@@ -12,18 +12,12 @@ import MainContent from './components/MainContent.vue'
   </div>
 </template>
 <style scoped>
-.sideBar {
-  height: 100vh;
-  width: 100%;
-}
-
 .content {
   display: flex;
   justify-content: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-
   row-gap: 5%;
 }
 </style>

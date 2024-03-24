@@ -14,7 +14,7 @@ import IconLogo from './icons/IconLogo.vue'
 aside{
   background-color: var(--color-background-secondary);
   padding: 1.2rem;
-  width: 8vw; height: 100%;
+  width: fit-content; height: 100vh;
 
   display: flex;
   flex-direction: column;
