@@ -1,7 +1,9 @@
 <template>
   <section class="search" v-if="transports && transports[0] && transports[0]['fastest']">
     <h2 class="title">Essas são as melhores alternativas de viagens na data selecionada: </h2>
-    <div class="row">
+
+      <div class="results">
+        <div class="row">
       <div class="details">
         <div class="icon">
           <IconPayment />
@@ -21,7 +23,7 @@
     <div class="row">
       <div class="details">
         <div class="icon">
-          <IconPayment />
+          <IconClock />
         </div>
         <div class="information">
           <strong><h2>{{ transports[0]["most_economical"].name }}</h2></strong>
@@ -34,17 +36,21 @@
         <h4>{{ transports[0]["most_economical"].price_econ }}</h4>
       </div>
     </div>
-
-    
     <router-link to="/">
-      <Button  label="Limpar" style="width: 10rem; color:black; background-color: var(--yellow);" />
+      <Button  label="Limpar" style="width: 10rem; color:black; background-color: var(--yellow);" class="clearButton"/>
     </router-link>
+    
+  </div>
+
+
+
   </section>
   
 </template>
 
 <script>
 import IconPayment from '../components/icons/IconPayment.vue'
+import IconClock from '../components/icons/IconClock.vue'
 import ApiMixin from '@/mixins/ApiMixin';
 
 export default {
@@ -65,15 +71,22 @@ export default {
     },
     components : {
         IconPayment,
+        IconClock,
     }
 }
 </script>
 
 <style scoped>
+
 .search{
   display: flex; flex-direction: column; flex-wrap: wrap;
   gap: 1.5rem;
   width: 100%;
+}
+.results{
+  display: flex; flex-direction: column;
+  align-items: flex-end;
+  gap:1rem;
 }
 .row{
   flex-wrap: wrap;
@@ -88,14 +101,13 @@ export default {
 .details{
   display: flex;
 }
-.information{width:20vw}
+.information{width:20vw;border-radius: 0 5px 5px 0;}
 .title, .information {word-wrap: break-word;} 
 
-.preco {width: 10rem;}
+.preco {width: 10rem;border-radius: 5px;}
 
 .information, .preco {
   background-color: var(--gray-2);
-  border-radius: 5px;
 }
 
 .icon{
