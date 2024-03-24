@@ -1,8 +1,11 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-import json
+import uvicorn
+
+from routes import Transport
+
+
 
 app = FastAPI()
 
@@ -20,16 +23,8 @@ app.add_middleware(
 )
 
 
-# methods
+# Routes
+app.include_router(Transport.routes, prefix='')
 
-file = open('../../app/data.json')
-DATA = json.load(file)["transport"]
-
-@app.get("/")
-async def get_all():
-    
-    return DATA
-
-@app.get("/destiny/{city}")
-async def serch(city):
-    return DATA
+if __name__ == '__main__':
+    uvicorn.run("run:app", port=3000, reload=True)

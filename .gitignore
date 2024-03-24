@@ -53,3 +53,9 @@ pnpm-debug.log*
 /app/frontend/*.sw?
 
 /app/frontend/*.tsbuildinfo
+
+# Backnd
+/app/backend/venv
+/app/backend/.venv
+
+/app/backend/__pycache__

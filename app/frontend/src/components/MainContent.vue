@@ -27,9 +27,10 @@ import CalculateForm from './CalculateForm.vue'
 div {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
-  width: calc(82vw);
-  height: 35rem;
+  flex-grow: 1;
+  align-content: center;
+  width: min-content;
+  height: min-content;
 
   margin: 1rem;
 
@@ -51,16 +52,28 @@ div {
 }
 main {
   display: flex; align-items: center; justify-content: flex-start;
-  flex-wrap: wrap;
-  height: calc(100% - 4rem);
-  width: 100%;
+  flex-wrap: wrap; width: 100%;
 }
 .calculateForm {
   align-items: center; justify-content: center;
-  width: calc(45% * fit-content);padding: 1rem;
+  width: min-content;padding: 1rem;
 }
 .search{
-  flex-grow: 1;
   display: flex; justify-content: center; align-items: flex-start;
 }
+
+@media (max-width:1095px) {
+    main{
+      align-items: center; justify-content: center;
+    }
+    .row{
+      width: 164px;
+    }
+  }
+  @media (max-width:767px) {
+    .search{
+      align-items: center;
+      width: 40rem;
+    }
+  }
 </style>

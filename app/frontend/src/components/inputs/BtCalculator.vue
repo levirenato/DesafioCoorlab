@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <a href="#" >
+  <a href="/" >
     <i class="pi pi-calculator"></i>
     Calculadora de viagem
   </a>
@@ -15,6 +15,6 @@
     align-items: center;
     padding: 0;
     justify-content: space-between;
-    min-width: 100%;
+    font-size: 0.7rem;
   }
 </style>
