@@ -1,6 +1,18 @@
-# Relatório de Ferramentas Utilizadas
+# Resultado - Desafio CoorLab
 
 Olá a todos, primeiro, agradeço pela oportunidade. Estou ansioso pelas próximas etapas. Abaixo estão as ferramentas que utilizei para solucionar a problemática:
+
+OBS: No arquivo `run.sh`, na linha 10, há o comando para instalar o ambiente virtual `virtualenv`. Entretanto, em sistemas Manjaro, como é o meu caso, existe um bug que impede a instalação usando o pip. Para contornar esse problema, é necessário adicionar a flag `--break-system-packages`. No entanto, como o sistema a ser utilizado é o Ubuntu, acredito que não haverá problemas, então removi a flag no último commit. Contudo, se ocorrer algum erro como "error: externally-managed-environment", basta utilizar a solução mencionada acima.
+
+[Mais informações sobre o bug](https://forum.manjaro.org/t/managing-python-packages-on-manjaro-error-with-externally-managed-environment/144149)
+
+
+### frontend: http://localhost:8080/
+### backend:  http://localhost:3000/
+
+
+
+## Considerações
 
 - **Vue.js 3:** Utilizei o Vue.js 3 conforme solicitado, aproveitando os recursos avançados desta framework. Trabalhar com essa ferramenta é sempre surpreendente, pois é muito completa e tem excelente performance.
 
