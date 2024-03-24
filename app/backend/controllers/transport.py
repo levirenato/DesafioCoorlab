@@ -20,30 +20,28 @@ def find_transport(db: Session, city: str):
     most_economical= db.query(models.Transport).filter(models.Transport.city.ilike(city)).order_by(cast(func.replace(models.Transport.price_econ, 'R$', ''), Float)).first()
 
     return [
-    {
-        "fastest": {
-            "id": fastest.id,
-            "name": fastest.name,
-            "price_confort": fastest.price_confort,
-            "price_econ": fastest.price_econ,
-            "city": fastest.city,
-            "duration": fastest.duration,
-            "seat": fastest.seat,
-            "bed": fastest.bed
-        }
+{
+    "fastest": {
+        "id": fastest.id,
+        "name": fastest.name,
+        "price_confort": fastest.price_confort,
+        "price_econ": fastest.price_econ,
+        "city": fastest.city,
+        "duration": fastest.duration,
+        "seat": fastest.seat,
+        "bed": fastest.bed
     },
-    {
-        "most_economical": {
-            "id": most_economical.id,
-            "name": most_economical.name,
-            "price_confort": most_economical.price_confort,
-            "price_econ": most_economical.price_econ,
-            "city": most_economical.city,
-            "duration": most_economical.duration,
-            "seat": most_economical.seat,
-            "bed": most_economical.bed
-        }
+    "most_economical": {
+        "id": most_economical.id,
+        "name": most_economical.name,
+        "price_confort": most_economical.price_confort,
+        "price_econ": most_economical.price_econ,
+        "city": most_economical.city,
+        "duration": most_economical.duration,
+        "seat": most_economical.seat,
+        "bed": most_economical.bed
     }
+}
 ]
     
 
