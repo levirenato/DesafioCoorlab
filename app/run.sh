@@ -1,19 +1,19 @@
 #!/bin/bash
 
-#!/bin/bash
-
-# Diretório do frontend
-frontend_dir="/app/frontend"
+frontend_dir="frontend/"
 
 # Diretório do backend
-backend_dir="/app/backend"
-
-# Comandos para o frontend
-echo "Iniciando o frontend..."
-cd "$frontend_dir" && npm install # Navega até o diretório do frontend e instala as dependências
-npm run dev # Executa o servidor de desenvolvimento do Vue.js
+backend_dir="backend/"
 
 # Comandos para o backend
 echo "Iniciando o backend..."
-cd "$backend_dir" && pip install -r requirements.txt # Navega até o diretório do backend e instala as dependências
-python run.py # Inicia o servidor do FastAPI
+(cd "$backend_dir" && python -m pip install virtualenv --break-system-packages && \
+    python -m virtualenv venv && \
+    source venv/bin/activate && \
+    pip install -r requirements.txt && \
+    python3 run.py &)
+
+
+# Comandos para o frontend (executados em segundo plano)
+echo "Iniciando o frontend..."
+cd "$frontend_dir" && npm install && npm run dev
