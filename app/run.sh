@@ -7,7 +7,7 @@ backend_dir="backend/"
 
 # Comandos para o backend
 echo "Iniciando o backend..."
-(cd "$backend_dir" && python -m pip install virtualenv --break-system-packages && \
+(cd "$backend_dir" && python -m pip install virtualenv && \
     python -m virtualenv venv && \
     source venv/bin/activate && \
     pip install -r requirements.txt && \
