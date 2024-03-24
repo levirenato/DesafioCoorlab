@@ -14,12 +14,11 @@ import IconLogo from './icons/IconLogo.vue'
 aside{
   background-color: var(--color-background-secondary);
   padding: 1.2rem;
-  width: fit-content; height: 100vh;
+  width: max-content;
 
   display: flex;
   flex-direction: column;
   gap: 1rem;
   align-items: flex-start;
 }
-
 </style>

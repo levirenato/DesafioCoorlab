@@ -23,4 +23,10 @@ import MainContent from './components/MainContent.vue'
   width: 100%;
   row-gap: 5%;
 }
+@media (max-width:767px) {
+    .sideBar{
+      display: none;
+    }
+    
+  }
 </style>

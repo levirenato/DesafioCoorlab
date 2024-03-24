@@ -59,7 +59,21 @@ main {
   width: min-content;padding: 1rem;
 }
 .search{
-  flex-grow: 1;
   display: flex; justify-content: center; align-items: flex-start;
 }
+
+@media (max-width:1095px) {
+    main{
+      align-items: center; justify-content: center;
+    }
+    .row{
+      width: 164px;
+    }
+  }
+  @media (max-width:767px) {
+    .search{
+      align-items: center;
+      width: 40rem;
+    }
+  }
 </style>

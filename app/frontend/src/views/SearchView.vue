@@ -1,20 +1,20 @@
 <template>
-  <section class="search">
+  <section class="search" v-if="transports && transports[0] && transports[0]['fastest']">
+    <h2 class="title">Essas são as melhores alternativas de viagens na data selecionada: </h2>
     <div class="row">
-      <h2 class="title">Essas são as melhores alternativas de viagens na data selecionada: </h2>
       <div class="details">
         <div class="icon">
           <IconPayment />
         </div>
         <div class="information">
-          <strong><h2>{{ find[0].fastest.name }}</h2></strong>
-          <h4>Leito: {{ find[0].fastest.bed }} (completo)</h4>
-          <h4>tempo estimado: {{ find[0].fastest.duration }}</h4>
+          <strong><h2>{{ transports[0]["fastest"].name }}</h2></strong>
+          <h4>Leito: {{ transports[0]["fastest"].bed }} (completo)</h4>
+          <h4>tempo estimado: {{ transports[0]["fastest"].duration }}</h4>
         </div>
       </div>
       <div class="preco">
         <strong><h2>Preço</h2></strong>
-        <h4>{{ find[0].fastest.price_confort }}</h4>
+        <h4>{{ transports[0]["fastest"].price_confort }}</h4>
       </div>
     </div>
 
@@ -24,40 +24,44 @@
           <IconPayment />
         </div>
         <div class="information">
-          <strong><h2>{{ find[1].most_economical.name }}</h2></strong>
-          <h4>Poltrona: {{ find[1].most_economical.seat }} (Convencional)</h4>
-          <h4>tempo estimado: {{ find[1].most_economical.duration }}</h4>
+          <strong><h2>{{ transports[0]["most_economical"].name }}</h2></strong>
+          <h4>Poltrona: {{ transports[0]["most_economical"].seat }} (Convencional)</h4>
+          <h4>tempo estimado: {{ transports[0]["most_economical"].duration }}</h4>
         </div>
       </div>
       <div class="preco">
         <strong><h2>Preço</h2></strong>
-        <h4>{{ find[1].most_economical.price_econ }}</h4>
+        <h4>{{ transports[0]["most_economical"].price_econ }}</h4>
       </div>
     </div>
+
+    
+    <router-link to="/">
+      <Button  label="Limpar" style="width: 10rem; color:black; background-color: var(--yellow);" />
+    </router-link>
   </section>
+  
 </template>
 
 <script>
 import IconPayment from '../components/icons/IconPayment.vue'
-
+import ApiMixin from '@/mixins/ApiMixin';
 
 export default {
     name: "SearchView",
+    mixins: [ApiMixin],
 
-    data(){
-    return {
-            find : [],
-        }
-      },
-      methods:{
-        getTransport(){
-          fetch(`http://127.0.0.1:3000/search/${this.$route.params.city}`)
-          .then(res => res.json())
-          .then(data => this.find = data)
-        }
-      },
-     created(){
-         this.getTransport();
+
+
+    created(){
+      this.getTransport(`http://127.0.0.1:3000/search/${this.$route.params.city}`);
+    },
+
+    watch:{
+      $route(to){
+        this.getTransport(`http://127.0.0.1:3000/search/${to.params.city}`);
+      }
+      
     },
     components : {
         IconPayment,
@@ -69,7 +73,7 @@ export default {
 .search{
   display: flex; flex-direction: column; flex-wrap: wrap;
   gap: 1.5rem;
-  width: max-content;
+  width: 100%;
 }
 .row{
   flex-wrap: wrap;
@@ -77,12 +81,14 @@ export default {
   gap: 10px;
 }
 .title{
+  width: 25rem;
  text-align: start;
+ text-wrap: wrap;
 }
 .details{
   display: flex;
 }
-
+.information{width:20vw}
 .title, .information {word-wrap: break-word;} 
 
 .preco {width: 10rem;}
@@ -101,5 +107,27 @@ export default {
 .information, .preco, .icon {
   padding: 10px;
   display: grid; align-items: center; justify-content: flex-start;
+  }
+
+
+
+  @media (max-width:1095px) {
+    .row{
+      height: 164px;
+    }
+    .information{
+      width: 40vw;
+    }
+  }
+  @media (max-width:767px) {
+    .information{
+      align-items: center;
+      
+    }
+  }
+  @media (max-width:700px) {
+    .information{
+      min-width: 20vh;
+    }
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <form @submit="handleSubmit">
+    <form>
         <div class="title">
             <IconPayment />
             <h2>Calcule o valor da viagem</h2>
@@ -8,20 +8,29 @@
         <div class="inputs">
             <div class="">
             <label for="selectedCity">Destino</label>
-            <Dropdown inputId="selectedCity" v-model="selectedCity" 
-             :options="transports" optionLabel="city" 
-            placeholder="Selecione o destino" class="w-full md:w-14rem" style="width: 100%;"/>
+            <Dropdown
+             id="dropdown"
+             inputId="selectedCity" 
+             v-model="selectedCity" 
+             :options="transports" 
+             optionLabel="city"
+             placeholder="Selecione o destino" 
+             class="w-full md:w-14rem align-center" style="width: 100%;"/>
         </div>
         <div class="">
 
             <label for="data" class="font-bold block mb-2"> Data </label>
-            <Calendar v-model="selectedDate" showIcon iconDisplay="input"
-            inputId="data" placeholder="Selecione a data" style="width: 100%;"/>
+            <Calendar 
+            v-model="selectedDate" 
+            showIcon 
+            iconDisplay="input"
+            inputId="data" 
+            placeholder="Selecione a data" 
+            dateFormat="dd/mm/yy"
+            style="width: 100%;"/>
         </div>
         </div>
 
-
-        
         <Button label="Buscar" style="width: 10rem; color:black;" @click="visible = validation()" />
         <Dialog v-model:visible="visible" modal style="height: 16rem; width: 30rem; display: flex; justify-content: center; text-align: center;" >
                 <h2 style="margin: 1rem;">Insira os valores para iniciar a cotação</h2>
@@ -33,40 +42,30 @@
 </template>
 
 <script>
+import ApiMixin from '@/mixins/ApiMixin';
 import IconPayment from './icons/IconPayment.vue'
 import { ref } from "vue";
 
 export default {
     name: "CalculateForm",
+    mixins:[ApiMixin],
 
     data(){
         return {
-            selectedDate : ref(),
-            selectedCity : ref(),
             visible : ref(false),
-            transports : [],
         }
-    },
-    
-    methods: {
-        validation() {
-            if(this.selectedDate == undefined | this.selectedCity == undefined){
-                return true
-            }
-           else{
-               this.$router.replace(`/search/${this.selectedCity.city}`);
-               return false
-            }
-        },
-       getData(){
-            fetch('http://127.0.0.1:3000/')
-            .then(res => res.json())
-            .then(data => this.transports = data)
-       }
     },
 
     created(){
-        this.getData()
+        this.getTransport('http://127.0.0.1:3000/')
+    },
+
+    watch:{
+        $route(to){
+        if (Object.keys(to.params).length === 0){
+            this.clearData()
+        };
+      }
     },
 
     components : {
