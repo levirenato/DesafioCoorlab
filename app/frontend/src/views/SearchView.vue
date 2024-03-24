@@ -1,23 +1,20 @@
-<script setup>
-import IconPayment from './../components/icons/IconPayment.vue';
-</script>
 <template>
   <section class="search">
-    <h2 class="title">Essas são as melhores alternativas de viagens na data selecionada: </h2>
     <div class="row">
+      <h2 class="title">Essas são as melhores alternativas de viagens na data selecionada: </h2>
       <div class="details">
         <div class="icon">
           <IconPayment />
         </div>
         <div class="information">
-          <strong><h2>Nome da transportadora</h2></strong>
-          <h4>Leito:</h4>
-          <h4>tempo estimado:</h4>
+          <strong><h2>{{ find[0].fastest.name }}</h2></strong>
+          <h4>Leito: {{ find[0].fastest.bed }} (completo)</h4>
+          <h4>tempo estimado: {{ find[0].fastest.duration }}</h4>
         </div>
       </div>
       <div class="preco">
-        <h4>Preço</h4>
-        <h4>100 R$</h4>
+        <strong><h2>Preço</h2></strong>
+        <h4>{{ find[0].fastest.price_confort }}</h4>
       </div>
     </div>
 
@@ -27,18 +24,46 @@ import IconPayment from './../components/icons/IconPayment.vue';
           <IconPayment />
         </div>
         <div class="information">
-          <strong><h2>Nome da transportadora</h2></strong>
-          <h4>Leito:</h4>
-          <h4>tempo estimado:</h4>
+          <strong><h2>{{ find[1].most_economical.name }}</h2></strong>
+          <h4>Poltrona: {{ find[1].most_economical.seat }} (Convencional)</h4>
+          <h4>tempo estimado: {{ find[1].most_economical.duration }}</h4>
         </div>
       </div>
       <div class="preco">
-        <h4>Preço</h4>
-        <h4>100 R$</h4>
+        <strong><h2>Preço</h2></strong>
+        <h4>{{ find[1].most_economical.price_econ }}</h4>
       </div>
     </div>
   </section>
 </template>
+
+<script>
+import IconPayment from '../components/icons/IconPayment.vue'
+
+
+export default {
+    name: "SearchView",
+
+    data(){
+    return {
+            find : [],
+        }
+      },
+      methods:{
+        getTransport(){
+          fetch(`http://127.0.0.1:3000/search/${this.$route.params.city}`)
+          .then(res => res.json())
+          .then(data => this.find = data)
+        }
+      },
+     created(){
+         this.getTransport();
+    },
+    components : {
+        IconPayment,
+    }
+}
+</script>
 
 <style scoped>
 .search{
@@ -47,6 +72,7 @@ import IconPayment from './../components/icons/IconPayment.vue';
   width: max-content;
 }
 .row{
+  flex-wrap: wrap;
   display: flex;
   gap: 10px;
 }
@@ -57,7 +83,7 @@ import IconPayment from './../components/icons/IconPayment.vue';
   display: flex;
 }
 
-.title, .information {width: 25rem;}
+.title, .information {word-wrap: break-word;} 
 
 .preco {width: 10rem;}
 

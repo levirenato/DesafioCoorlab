@@ -14,8 +14,7 @@ import InputText from 'primevue/inputtext'
 import Button from 'primevue/button';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
-import DataView from 'primevue/dataview';
-import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions'
+import Dialog from 'primevue/dialog';
 
 const app = createApp(App)
 
@@ -106,7 +105,7 @@ app.component('InputText', InputText)
 app.component('Button', Button)
 app.component('Dropdown', Dropdown)
 app.component('Calendar', Calendar)
-app.component('DataView', DataView)
-app.component('DataViewLayoutOptions', DataViewLayoutOptions)
+app.component('Dialog', Dialog)
+
 
 app.mount('#app')

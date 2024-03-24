@@ -1,5 +1,5 @@
 <template>
-    <img src="../../assets/logo.png" alt="Logo da Cb viagens" width="65%" >
+    <img src="../../assets/logo.png" alt="Logo da Cb viagens" width="130rem" >
 </template>
 <style scoped>
     img{
